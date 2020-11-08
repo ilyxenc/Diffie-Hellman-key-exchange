@@ -1,5 +1,7 @@
 import random
 import math
+import sys
+sys.setrecursionlimit(1500)
 
 # быстрый поиск модуля от степени числа
 def power(x, n, mod):
@@ -76,5 +78,48 @@ def randPrime(n):
         num = random.randint(rangeStart, rangeEnd)
         if isPrime(num):
             return num
+
+# вычисление функции Эйлера
+def EulersFunction(num):
+    e = num
+    arr = [[num]]
+    for i in arr:
+        e *= (i[0] - 1) / i[0]
+    return int(e)
+
+# нахождение делителей числа
+def divisors(num):
+    arr = []
+    arr2 = []
+    d = 2
+    while len(arr2) != 3:
+        if num % d == 0:
+            num /= d
+            arr2 += [d]
+        else:
+            if len(arr2) != 0:
+                arr.append(arr2)
+                arr2 = []
+            d += 1
+    arr.append(arr2)
+    return arr
+
+# нахождение первообразного корня для от числа p
+def primitiveRoot(num):
+    if isPrime(num):
+        e = EulersFunction(num)
+        arrDivisors = divisors(e)
+        arrAnswers = []
+        for i in range(2, num):
+            arrMiddleAnswers = []
+            for j in range(0, len(arrDivisors)):
+                arrMiddleAnswers.append(power(i, int(e / arrDivisors[j][0]), num))
+            if 1 not in arrMiddleAnswers:
+                arrAnswers.append(i)
+            if len(arrAnswers) == 10:
+                break
+        return arrAnswers[0]
+    else:
+        raise Exception('Impossible to decide')
 
 LOW_PRIMES = primeSieve(100)

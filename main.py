@@ -2,7 +2,8 @@ import functions as fn
 
 a, b = fn.rand(100), fn.rand(100) # генерация закрытых ключей A и B
 p = fn.randPrime(300) # простое число размерности 300
-g = 3 # первообразный корень
+g = fn.primitiveRoot(p) # первообразный корень
+
 print('Закрытый ключ a           :', a)
 print('Закрытый ключ b           :', b)
 print('Случайное простое число p :', p)
