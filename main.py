@@ -1,8 +1,8 @@
 import functions as fn
 
 a, b = fn.rand(5), fn.rand(5) # генерация закрытых ключей A и B
-p = 1587637517
-g = 2
+p = fn.randPrime(10) # простое число размерности 300
+g = fn.primitiveRoot(p) # первообразный корень
 
 print('Закрытый ключ a           :', a)
 print('Закрытый ключ b           :', b)
